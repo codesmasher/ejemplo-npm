@@ -1,0 +1,32 @@
+{
+  "name": "npm-ejemplo",
+  "version": "1.0.0",
+  "description": "Ejemplo de uso de npm",
+  "main": "server/server.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "mocha",
+    "posttest": "npm run lint",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codesmasher/npm-ejemplo.git"
+  },
+  "keywords": [
+    "nodejs",
+    "npm",
+    "eslint",
+    "mocha"
+  ],
+  "author": "Enrique Sotelo Ponce",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codesmasher/npm-ejemplo/issues"
+  },
+  "homepage": "https://github.com/codesmasher/npm-ejemplo#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "mocha": "^7.0.1"
+  }
+}
