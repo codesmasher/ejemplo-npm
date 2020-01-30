@@ -7,9 +7,17 @@ const port = 3000;
 
 const server = http.createServer((req, res) => {
   return fs.readFile('public/index.html', (err, data) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    res.end();
+
+    if (err) {
+      // print error and response with a not found code
+      console.log(err);
+      res.statusCode = 404;
+      res.end();
+    } else {
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write(data);
+      res.end();
+    }
   });
 });
 
