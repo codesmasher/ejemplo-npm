@@ -6,7 +6,10 @@ const hostname = '127.0.0.1';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-  return fs.readFile('public/index.html', (err, data) => {
+  if (req.url === '/') {
+    req.url = '/index.html';
+  }
+  return fs.readFile(`public${req.url}`, (err, data) => {
 
     if (err) {
       // print error and response with a not found code
@@ -14,7 +17,18 @@ const server = http.createServer((req, res) => {
       res.statusCode = 404;
       res.end();
     } else {
-      res.writeHead(200, {'Content-Type': 'text/html'});
+      let dotoffset = req.url.lastIndexOf('.');
+      let mimetype = dotoffset == -1 ? 'text/plain' : {
+        '.html' : 'text/html',
+        '.ico' : 'image/x-icon',
+        '.jpg' : 'image/jpeg',
+        '.png' : 'image/png',
+        '.gif' : 'image/gif',
+        '.css' : 'text/css',
+        '.js' : 'text/javascript',
+        '.map': 'application/json'
+      }[req.url.substr(dotoffset)];
+      res.writeHead(200, {'Content-Type': mimetype});
       res.write(data);
       res.end();
     }
